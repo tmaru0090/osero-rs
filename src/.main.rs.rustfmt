@@ -1,0 +1,52 @@
+mod alias;
+use crate::alias::Res;
+
+fn main()->Res<()> {
+    // 譜面サイズ
+    const HUMEN_SIZE:usize = 8;
+    let kuro = "◯";
+    let shiro = "●";
+    let player_state = "初期状態ですー";
+    // 譜面初期データ
+    let mut humen_data:[i8;HUMEN_SIZE*HUMEN_SIZE] =[
+        2,2,2,2,2,2,2,2,
+        2,2,2,2,2,2,2,2,
+        2,2,2,2,2,2,2,2,
+        2,2,2,1,0,2,2,2,
+        2,2,2,0,1,2,2,2,
+        2,2,2,2,2,2,2,2,
+        2,2,2,2,2,2,2,2,
+        2,2,2,2,2,2,2,2,
+    ];
+    println!("譜面サイズ {}x{}",HUMEN_SIZE,HUMEN_SIZE);
+    while true{
+    // 譜面枠の描画(上)
+    for _ in 0..5{
+        print!("+--");
+    }
+    print!("+");
+    
+    // 譜面データの描画
+    for (i,&data) in humen_data.iter().enumerate(){
+        if i%8 == 0{
+            print!("\n");
+        }
+        if data == 2{
+            print!("□ ");
+        }
+        else if data == 0{
+            print!("{} ",shiro);
+        }
+        else if data == 1{
+            print!("{} ",kuro);
+        }
+    }
+    println!();
+    // 譜面枠の描画(下)
+    for _ in 0..5{
+        print!("+--");
+    }
+    println!("+");
+    }
+    Ok(())
+}
